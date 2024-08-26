@@ -1,0 +1,7 @@
+{
+  "name": "LUISTIENDA",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
