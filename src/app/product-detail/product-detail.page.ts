@@ -41,6 +41,6 @@ export class ProductDetailPage implements OnInit {
     });
     toast.present();
     // Aquí puedes agregar el producto al carrito
-    this.cartService.addCart({ product: this.product, quantity: 1 }).subscribe();
+    this.cartService.addCart({ product: this.product, quantity: 1 });
   }
 }

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      TU TIENDA FAVORITA
+      Welcome to my shop
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/cart">
@@ -20,14 +20,17 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Barra de búsqueda -->
   <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filterProducts()"></ion-searchbar>
 
+  <!-- Selector de categorías -->
   <ion-segment [(ngModel)]="selectedCategory" (ionChange)="filterProducts()">
     <ion-segment-button *ngFor="let category of categories" [value]="category">
       {{ category }}
     </ion-segment-button>
   </ion-segment>
 
+  <!-- Rejilla de productos -->
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of filteredProducts">
@@ -36,9 +39,12 @@
             <ion-card-title>{{ product.title }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
+            <!-- Imagen del producto -->
             <img [src]="product.image" alt="{{ product.title }}" />
-            <p>Price: {{ product.price | currency:'USD' }}</p>
-            <p>{{ product.description }}</p>
+            <!-- Precio del producto -->
+            <p>Price: {{ product.price | currency: 'USD' }}</p>
+            <!-- Descripción del producto -->
+            <p>{{ product.description | slice:0:100 }}...</p>
           </ion-card-content>
         </ion-card>
       </ion-col>

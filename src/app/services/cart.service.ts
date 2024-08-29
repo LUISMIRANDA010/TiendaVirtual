@@ -1,39 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  private baseUrl: string = `${environment.apiUrl}/carts`;
+  // Utiliza BehaviorSubject para manejar el estado del carrito
+  private cartSubject = new BehaviorSubject<any[]>([]);
+  cart$: Observable<any[]> = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  // Obtener todos los carritos
-  getCartItems(): Observable<any> {
-    return this.http.get(this.baseUrl);
+  // Obtener todos los artículos del carrito
+  getCartItems(): Observable<any[]> {
+    return this.cart$;
   }
 
-  // Obtener un carrito específico por ID
-  getCartById(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  // Agregar un nuevo artículo al carrito
+  addCart(item: any): void {
+    const currentCart = this.cartSubject.value;
+    this.cartSubject.next([...currentCart, item]);
   }
 
-  // Agregar un nuevo carrito
-  addCart(cart: any): Observable<any> {
-    return this.http.post(this.baseUrl, cart);
+  // Eliminar un artículo del carrito por ID
+  removeCartItem(itemId: number): void {
+    const updatedCart = this.cartSubject.value.filter(item => item.id !== itemId);
+    this.cartSubject.next(updatedCart);
   }
 
-  // Actualizar un carrito
-  updateCart(id: number, cart: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, cart);
+  // Actualizar la cantidad de un artículo en el carrito
+  updateCartItemQuantity(itemId: number, quantity: number): void {
+    const updatedCart = this.cartSubject.value.map(item =>
+      item.id === itemId ? { ...item, quantity } : item
+    );
+    this.cartSubject.next(updatedCart);
   }
 
-  // Eliminar un carrito
-  deleteCart(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  // Limpiar todos los artículos del carrito
+  clearCart(): void {
+    this.cartSubject.next([]);
   }
 }

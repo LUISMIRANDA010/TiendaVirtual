@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-title>Product Detail</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="addToCart()">
-        <ion-icon name="cart" slot="icon-only"></ion-icon>
+      <ion-button [routerLink]="['/cart']">
+        <ion-icon name="cart"></ion-icon>
         Add to Cart
       </ion-button>
     </ion-buttons>
@@ -16,7 +16,7 @@
       <ion-card-title>{{ product?.title }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <img [src]="product?.image" alt="{{ product?.title }}" class="product-image"/>
+      <img [src]="product?.image" alt="{{ product?.title }}" class="product-image" />
       <p>Price: {{ product?.price | currency:'USD' }}</p>
       <p>{{ product?.description }}</p>
       <ion-button expand="full" color="primary" (click)="addToCart()">Add to Cart</ion-button>

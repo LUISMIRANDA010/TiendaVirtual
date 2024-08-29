@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,8 +14,9 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
-  ) {}
+    private productService: ProductService,
+    private cartService: CartService
+  ) { }
 
   ngOnInit() {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
@@ -25,7 +27,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    // Logic to add the product to the cart
-    // Display a toast message upon success
+    if (this.product) {
+      this.cartService.addCart(this.product);
+    } else {
+      console.error('No product available to add to cart');
+    }
   }
 }

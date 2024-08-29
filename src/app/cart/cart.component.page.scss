@@ -1,0 +1,36 @@
+ion-header {
+    --background: #f8f8f8;
+  }
+  
+  ion-item {
+    margin-bottom: 10px;
+  }
+  
+  ion-thumbnail {
+    margin-right: 10px;
+  }
+  
+  ion-footer {
+    background: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .empty-cart {
+    text-align: center;
+    margin-top: 50px;
+    ion-icon {
+      font-size: 80px;
+      color: #ccc;
+    }
+    p {
+      font-size: 18px;
+      color: #666;
+    }
+  }
+  
+  ion-toast {
+    --background: #4caf50;
+    --color: #fff;
+  }
+  

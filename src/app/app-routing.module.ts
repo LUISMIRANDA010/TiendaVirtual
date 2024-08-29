@@ -6,14 +6,17 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
+
   {
     path: 'product-detail/:id',
     loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailPageModule)
   },
+
   {
     path: 'cart',
-    loadChildren: () => import('./cart/cart.module').then(m => m.CartPageModule)
+    loadChildren: () => import('./cart/cart.module').then(m => m.CartPageModule)  // Ruta correcta para el carrito
   },
+  
   {
     path: '',
     redirectTo: 'home',
